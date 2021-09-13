@@ -1,5 +1,5 @@
 class CreateSpecificationService {
-  execute() {
+  execute(): void {
     console.log("TODO");
   }
 }
