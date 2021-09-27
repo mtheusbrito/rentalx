@@ -1,0 +1,6 @@
+docker ps -a          Lista todos os containers existentes.
+docker rm idConainer  Remove o container passsando id ou name como parametro.
+docker stop/start idConainer           Pausa/Inicia o container com base no id.
+docker-compose start/stop  Inicia/Pausa todos os serviços contidos dentro do docker compose.
+docker exec -it id/nameContainer /bin/bash Acessa o container/Maquina
+
