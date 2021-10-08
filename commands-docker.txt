@@ -1,3 +1,16 @@
+Dockerfile -> Receita para construir um container.
+docker build -t rentx .
+docker run -p 3333:3333 rentx
+
+
+Docker compose -> Orquestrador de containers
+docker-compose up -d  
+docker-compose up --forcer-recreate
+
+
+
+
+
 docker ps -a          Lista todos os containers existentes.
 docker rm idConainer  Remove o container passsando id ou name como parametro.
 docker stop/start idConainer           Pausa/Inicia o container com base no id.
