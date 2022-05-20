@@ -1,3 +1,5 @@
+import { Category } from "./src/modules/cars/entities/Category";
+
 module.exports = {
   type: process.env.DB_TYPE,
   port: process.env.DB_PORT,
@@ -6,6 +8,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_DATABASE,
   migrations: ["./src/database/migrations/*.ts"],
+  entities: [Category],
   cli: {
     migrationsDir: "./src/database/migrations",
   },
