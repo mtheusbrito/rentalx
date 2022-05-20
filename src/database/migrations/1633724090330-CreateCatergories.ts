@@ -6,10 +6,17 @@ export class CreateCatergories1633724090330 implements MigrationInterface {
       new Table({
         name: "categories",
         columns: [
-          { name: "id", type: "uuid", isPrimary: true },
+          // { name: "id", type: "uuid", isPrimary: true },     //postgres
+          {
+            name: "id",
+            type: "varchar",
+            isPrimary: true,
+            generationStrategy: "uuid",
+          },
           { name: "name", type: "varchar" },
           { name: "description", type: "varchar" },
           { name: "created_at", type: "timestamp", default: "now()" },
+          { name: "deleted_at", type: "timestamp", isNullable: true },
         ],
       })
     );

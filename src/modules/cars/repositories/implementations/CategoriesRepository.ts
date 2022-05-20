@@ -13,27 +13,25 @@ class CategoriesRepository implements ICategoriesRepository {
   private static INSTANCE: CategoriesRepository;
 
   // singleton
-  private constructor() {
+  constructor() {
     this.repository = getRepository(Category);
   }
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-    return CategoriesRepository.INSTANCE;
-  }
+
   async create({ description, name }: ICreateCategoryDTO): Promise<void> {
     const category: Category = this.repository.create({
       description,
       name,
     });
+    await this.repository.save(category);
   }
-  list(): Category[] {
-    return this.categories;
+  async list(): Promise<Category[]> {
+    const categories = await this.repository.find();
+    return categories;
   }
 
-  findByName(name: string): Category {
-    const category = this.categories.find((cat) => cat.name === name);
+  async findByName(name: string): Promise<Category> {
+    console.log("find by name");
+    const category = await this.repository.findOne({ name });
     return category;
   }
 }

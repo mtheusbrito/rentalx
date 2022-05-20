@@ -1,4 +1,10 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryColumn,
+} from "typeorm";
 import { v4 } from "uuid";
 
 @Entity("categories")
@@ -14,6 +20,9 @@ class Category {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 
   constructor() {
     if (!this.id) {
