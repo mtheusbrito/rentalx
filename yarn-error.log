@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn typeorm migration:run
+  /usr/local/bin/node /usr/local/bin/yarn dev
 
 PATH: 
   /Users/matheusbrito/.wasmer/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/matheusbrito/.wasmer/bin:/Users/matheusbrito/.zinit/polaris/bin:/opt/local/bin:/opt/local/sbin:/Users/matheusbrito/.wasmer/globals/wapm_packages/.bin:/Users/matheusbrito/.wasmer/globals/wapm_packages/.bin
