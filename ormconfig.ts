@@ -1,3 +1,4 @@
+import { User } from "./src/modules/accounts/entities/User";
 import { Category } from "./src/modules/cars/entities/Category";
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_DATABASE,
   migrations: ["./src/database/migrations/*.ts"],
-  entities: [Category],
+  entities: [Category, User],
   cli: {
     migrationsDir: "./src/database/migrations",
   },
