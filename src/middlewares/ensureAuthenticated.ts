@@ -11,7 +11,7 @@ export async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction
-) {
+): Promise<void> {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -27,9 +27,14 @@ export async function ensureAuthenticated(
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(user_id);
+
     if (!user) {
       throw new AppError("Users does exists!", 401);
     }
+
+    request.user = {
+      id: user.id,
+    };
   } catch (err) {
     throw new AppError("Invalid token!", 401);
   }
