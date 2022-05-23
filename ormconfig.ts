@@ -1,6 +1,3 @@
-import { User } from "./src/modules/accounts/entities/User";
-import { Category } from "./src/modules/cars/entities/Category";
-
 module.exports = {
   type: process.env.DB_TYPE,
   port: process.env.DB_PORT,
@@ -8,9 +5,9 @@ module.exports = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASS,
   database: process.env.DB_DATABASE,
-  migrations: ["./src/database/migrations/*.ts"],
-  entities: [Category, User],
+  migrations: ["./src/shared/infra/typeorm/migrations/*{.ts,.js}"],
+  entities: ["./src/modules/**/**/infra/typeorm/entites/*{.ts,.js}"],
   cli: {
-    migrationsDir: "./src/database/migrations",
+    migrationsDir: "./src/shared/infra/typeorm/migrations",
   },
 };
