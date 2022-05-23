@@ -27,6 +27,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
   async findById(id: string): Promise<User | undefined> {
     return this.users.find((user) => user.id === id);
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(data: ICreateUserDTO): Promise<void> {
     throw new Error("Method not implemented.");
   }
