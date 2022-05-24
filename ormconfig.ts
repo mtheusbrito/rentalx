@@ -6,7 +6,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_DATABASE,
   migrations: ["./src/shared/infra/typeorm/migrations/*{.ts,.js}"],
-  entities: ["./src/modules/**/**/infra/typeorm/entites/*{.ts,.js}"],
+  entities: ["./src/modules/**/**/infra/typeorm/entities/*{.ts,.js}"],
   cli: {
     migrationsDir: "./src/shared/infra/typeorm/migrations",
   },

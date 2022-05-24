@@ -3,14 +3,18 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
 } from "typeorm";
 import { v4 } from "uuid";
 
+import { Category } from "./Category";
+
 @Entity("cars")
 class Car {
   @PrimaryColumn()
-  id: string;
+  id?: string;
   @Column()
   name: string;
 
@@ -30,6 +34,11 @@ class Car {
 
   @Column()
   available: boolean;
+
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: "category_id" })
+  category: Category;
+  // muitos carros para uma categoria
 
   @Column()
   category_id: string;
