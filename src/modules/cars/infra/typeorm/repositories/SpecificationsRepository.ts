@@ -21,13 +21,17 @@ class SpecificationsRepository implements ISpecificationsRepository {
     });
     return specification;
   }
-  async create({ description, name }: ICreateSpecificationDTO): Promise<void> {
+  async create({
+    description,
+    name,
+  }: ICreateSpecificationDTO): Promise<Specification> {
     const specification = this.repository.create({
       description,
       name,
     });
 
-    await this.repository.save(specification);
+    const result = await this.repository.save(specification);
+    return result;
 
     // Object.assign(specification, { name, description, created_at: new Date() });
 
@@ -35,7 +39,8 @@ class SpecificationsRepository implements ISpecificationsRepository {
   }
 
   async findByIds(ids: string[]): Promise<Specification[]> {
-    throw new Error("Method not implemented.");
+    const specifications = await this.repository.findByIds(ids);
+    return specifications;
   }
 }
 
