@@ -12,6 +12,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
   constructor() {
     this.repository = getRepository(Specification);
   }
+
   async findByName(name: string): Promise<Specification> {
     const specification = await this.repository.findOne({
       where: {
@@ -31,6 +32,10 @@ class SpecificationsRepository implements ISpecificationsRepository {
     // Object.assign(specification, { name, description, created_at: new Date() });
 
     // this.specifications.push(specification);
+  }
+
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    throw new Error("Method not implemented.");
   }
 }
 
