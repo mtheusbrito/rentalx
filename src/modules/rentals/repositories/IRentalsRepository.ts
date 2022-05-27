@@ -1,7 +1,8 @@
+import { ICreateRentalDTO } from "@modules/rentals/infra/typeorm/dtos/ICreateRentalDTO";
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 
 interface IRentalsRepository {
-  create(): Promise<void>;
+  create(data: ICreateRentalDTO): Promise<Rental>;
   findOpenRentalByCar(car_id: string): Promise<Rental>;
   findOpenRentalByUser(user_id: string): Promise<Rental>;
 }
