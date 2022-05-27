@@ -12,10 +12,10 @@ interface IRequest {
   car_id: string;
   expected_return_date: Date;
 }
-// @injectable()
+@injectable()
 class CreateRentalUseCase {
   constructor(
-    // @inject("RentalsRepository")
+    @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository
   ) {}
   async execute({
@@ -24,9 +24,7 @@ class CreateRentalUseCase {
     expected_return_date,
   }: IRequest): Promise<Rental> {
     const minimumHour = 24;
-    // O aluguel deve ter duraçao mínima de 24 horas.
-    // Não deve ser possivel cadastrar um novo aluguel caso
-    // já exista um aberto para o mesmo carro e mesmo usuário
+
     const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
       car_id
     );
