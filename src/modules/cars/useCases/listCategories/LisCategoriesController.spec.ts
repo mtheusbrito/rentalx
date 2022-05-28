@@ -7,15 +7,16 @@ import { app } from "@shared/infra/http/app";
 import createConnection from "@shared/infra/typeorm/";
 
 let connection: Connection;
-describe("Create category controller", () => {
+describe("List category controller", () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.dropDatabase();
     await connection.runMigrations();
+
     const id = v4();
 
     const password = await hash("admin", 8);
-    connection.query(`INSERT INTO users(id, name, email, driver_license, password, isAdmin, created_at, deleted_at)
+    await connection.query(`INSERT INTO users(id, name, email, driver_license, password, isAdmin, created_at, deleted_at)
                               values('${id}', 'admin', 'admin@rentx.com', 'ABCABC' , '${password}', true , NOW(), NULL )`);
   });
 
@@ -23,14 +24,14 @@ describe("Create category controller", () => {
     await connection.dropDatabase();
     await connection.close();
   });
-  it("should be able to create a new category", async () => {
+  it("should be able to list all available categories", async () => {
     const responseToken = await request(app).post("/session").send({
       email: "admin@rentx.com",
       password: "admin",
     });
     const { token } = responseToken.body;
 
-    const response = await request(app)
+    await request(app)
       .post("/categories")
       .send({
         name: "Category supertest",
@@ -39,25 +40,11 @@ describe("Create category controller", () => {
       .set({
         Authorization: `Bearer ${token}`,
       });
-    expect(response.status).toBe(201);
-  });
 
-  it("should no be able to create a new category with name exists ", async () => {
-    const responseToken = await request(app).post("/session").send({
-      email: "admin@rentx.com",
-      password: "admin",
-    });
-    const { token } = responseToken.body;
+    const response = await request(app).get("/categories");
 
-    const response = await request(app)
-      .post("/categories")
-      .send({
-        name: "Category supertest",
-        description: "Category supertest",
-      })
-      .set({
-        Authorization: `Bearer ${token}`,
-      });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0]).toHaveProperty("id");
   });
 });
