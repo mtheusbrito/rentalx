@@ -2,17 +2,24 @@ import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
+  Entity,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 } from "uuid";
 
+@Entity("rentals")
 class Rental {
   @PrimaryColumn()
   id: string;
 
+  @Column()
+  total: number;
+
+  @Column()
   car_id: string;
 
+  @Column()
   user_id: string;
 
   @Column()

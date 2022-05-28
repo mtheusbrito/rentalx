@@ -18,7 +18,7 @@ class CreateRentalUseCase {
   constructor(
     @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
-
+    @inject("DayjsDateProvider")
     private dateProvider: IDateProvider
   ) {}
   async execute({
@@ -44,7 +44,7 @@ class CreateRentalUseCase {
       throw new AppError("There`s a rental in progress for user!");
     }
 
-    const compare = await this.dateProvider.compareInHours(
+    const compare = this.dateProvider.compareInHours(
       this.dateProvider.dateNow(),
       expected_return_date
     );

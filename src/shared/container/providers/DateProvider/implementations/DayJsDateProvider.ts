@@ -8,7 +8,8 @@ class DayjsDateProvider implements IDateProvider {
   dateNow(): Date {
     return dayjs().toDate();
   }
-  async compareInHours(start_date: Date, end_date: Date): Promise<number> {
+  compareInHours(start_date: Date, end_date: Date): number {
+    console.log(start_date);
     const end_date_utc = this.convertToUTC(end_date);
     const start_date_utc = this.convertToUTC(start_date);
     return dayjs(end_date_utc).diff(start_date_utc, "hours");
