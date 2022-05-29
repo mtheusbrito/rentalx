@@ -10,6 +10,7 @@ class RentalsRepository implements IRentalsRepository {
   constructor() {
     this.repository = getRepository(Rental);
   }
+
   async create({
     car_id,
     expected_return_date,
@@ -36,6 +37,11 @@ class RentalsRepository implements IRentalsRepository {
     });
 
     return openByCar;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.repository.findOne(id);
+    return rental;
   }
 }
 export { RentalsRepository };
