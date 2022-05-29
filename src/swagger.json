@@ -164,6 +164,7 @@
         "tags": ["Cars"],
         "summary": "Create a new car",
         "description": "Create a new car",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -179,6 +180,51 @@
           },
           "400": {
             "description": "Car already exists!"
+          }
+        }
+      }
+    },
+    "/cars/images/{id}": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Upload images",
+        "description": "Uploads images",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": { 
+              "type": "string" 
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201":{
+              "description": "Created"
+            },
+            "401":{
+              "description": "Token missing"
+            }
           }
         }
       }
@@ -202,25 +248,24 @@
         "name": {
           "type": "string"
         },
-        "description": { 
+        "description": {
           "type": "string"
         },
         "daily_rate": {
-          "type" : "number"
+          "type": "number"
         },
         "license_plate": {
           "type": "string"
         },
-        "fine_amount":{
-          "type":  "number"
+        "fine_amount": {
+          "type": "number"
         },
-        "brand": { 
+        "brand": {
           "type": "string"
         },
         "category_id": {
           "type": "string"
         }
-
       }
     }
   },
