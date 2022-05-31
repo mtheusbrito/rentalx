@@ -21,6 +21,7 @@ class UsersTokensRepository implements IUsersTokensRepository {
         user_id,
         refresh_token,
       },
+      withDeleted: false,
       relations: ["user"],
     });
     return userToken;

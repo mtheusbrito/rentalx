@@ -46,4 +46,5 @@ container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
   UsersTokensRepository
 );
+
 export default { container };

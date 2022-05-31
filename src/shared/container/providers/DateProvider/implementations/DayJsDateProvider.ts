@@ -1,9 +1,13 @@
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 
 import { IDateProvider } from "../IDateProvider";
 
 dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.guess();
+dayjs.tz.setDefault("America/Sao_Paulo");
 class DayjsDateProvider implements IDateProvider {
   dateNow(): Date {
     return dayjs().toDate();
@@ -24,6 +28,9 @@ class DayjsDateProvider implements IDateProvider {
   }
   addDays(days: number): Date {
     return dayjs().add(days, "days").toDate();
+  }
+  addHours(hours: number): Date {
+    return dayjs().add(hours, "hours").toDate();
   }
 }
 
