@@ -15,36 +15,18 @@ export async function ensureAuthenticated(
   next: NextFunction
 ): Promise<void> {
   const authHeader = request.headers.authorization;
-  const usersTokensRepository = new UsersTokensRepository();
-  const { secret_refresh_token } = auth;
+
+  const { secret_refresh_token, secret_token } = auth;
   if (!authHeader) {
     throw new AppError("Token missing", 401);
   }
   // Bearer tokenCode
   const [, token] = authHeader.split(" ");
   try {
-    const { sub: user_id } = verify(token, secret_refresh_token) as IPayload;
-
-    // const usersRepository = new UsersRepository();
-    // const user = await this.usersRepository.findById()
-    // if (!user) {
-    //   throw new AppError("Users does exists!", 401);
-    // }
-
-    const userToken = await usersTokensRepository.findByUserIdAndRefreshToken(
-      user_id,
-      token
-    );
-    if (!userToken) {
-      throw new AppError("Invalid token!", 401);
-    }
-
-    if (!userToken.user) {
-      throw new AppError("Users does exists!", 401);
-    }
+    const { sub: user_id } = verify(token, secret_token) as IPayload;
 
     request.user = {
-      id: userToken.user.id,
+      id: user_id,
     };
   } catch (err) {
     throw new AppError("Invalid token!", 401);
