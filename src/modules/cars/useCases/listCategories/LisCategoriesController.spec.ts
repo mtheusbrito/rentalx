@@ -29,7 +29,7 @@ describe("List category controller", () => {
       email: "admin@rentx.com",
       password: "admin",
     });
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     await request(app)
       .post("/categories")
@@ -38,7 +38,7 @@ describe("List category controller", () => {
         description: "Category supertest",
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
 
     const response = await request(app).get("/categories");
